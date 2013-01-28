@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="utf-8">
+  <title>Google Phone Gallery</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="../out/acute.js"></script>
+  <script>
+    // does this execute before the body tag thing? I hope so.
+    acute.bootstrap();
+  </script>
+  <script src="../angular-1.1.1.js"></script>
+<!--
+  <script src="js/controllers.js"></script>
+-->
+</head>
+<body ng-controller="acute.tutorial.step0.BareBonesCtrl">
+    <li ng-repeat="phone in phones">
+      {{phone.name}}
+      <p>{{phone.snippet}}</p>
+    </li>
+  <p>Total number of phones: {{phones.length}}</p>
+  <p>I say: {{hello}}</p>
+ <table>
+    <tr><th>row number</th></tr>
+    <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]"><td>{{i+1}}</td></tr>
+  </table>
+</body>
+</html>
