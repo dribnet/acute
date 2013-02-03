@@ -7,24 +7,41 @@
   <link rel="stylesheet" href="css/bootstrap.css">
   <script src="../out/acute.js"></script>
   <script>
-    // does this execute before the body tag thing? I hope so.
-    acute.bootstrap();
+    // run this before including angular
+    acute.preshow();
   </script>
   <script src="../angular-1.1.1.js"></script>
-<!--
+  <script>
+    // now run acute helper functions
+    acute.bootstrap();
+  </script>
+  <!--
   <script src="js/controllers.js"></script>
 -->
 </head>
-<body ng-controller="acute.tutorial.step0.BareBonesCtrl">
-    <li ng-repeat="phone in phones">
-      {{phone.name}}
-      <p>{{phone.snippet}}</p>
-    </li>
-  <p>Total number of phones: {{phones.length}}</p>
-  <p>I say: {{hello}}</p>
- <table>
-    <tr><th>row number</th></tr>
-    <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]"><td>{{i+1}}</td></tr>
-  </table>
+<body ng-controller="acute.tutorial.step0.PhoneListCtrl">
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <!--Sidebar content-->
+ 
+      Search: <input ng-model="query">
+ 
+    </div>
+    <div class="span10">
+      <!--Body content-->
+ 
+      <ul class="phones">
+        <li ng-repeat="phone in phones | filter:query">
+          {{phone.name}}
+          <p>{{phone.snippet}}</p>
+        </li>
+      </ul>
+ 
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

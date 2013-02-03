@@ -1,1 +1,1 @@
-../../public/angular-1.1.1.js
+../../public/vendor/angular-1.1.1.js

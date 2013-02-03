@@ -2,6 +2,7 @@
 
 /* Controllers */
 function PhoneListCtrl($scope) {
+  console.log($scope)
   $scope.phones = [
     {"name": "Nexus S",
      "snippet": "Fast just got faster with Nexus S."},
