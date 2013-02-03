@@ -1,22 +1,17 @@
 (ns acute.tutorial
   (:require [acute :refer [placeholder]]))
 
-(defn ^:export PhoneListCtrl [$scope]
-  ; (.log js/console $scope)
-  (aset $scope "phones" [
-      {:name "Nexus S"
-       :snippet "Fast just got faster with Nexus S."
-       :age 0
-      }
-      {:name "Motorola XOOM™ with Wi-Fi"
-       :snippet "The Next, Next Generation tablet."
-       :age 1
-      }
-      {:name "MOTOROLA XOOM™"
-       :snippet "The Next, Next Generation tablet."
-       :age 2
-      }
-    ])
+(defn ^:export PhoneListCtrl [$scope, $http]
+  (-> $http (.get "phones/phones.json")
+    (.success 
+      (fn [data]
+        ; importing edn file directly would be better than
+        ; calling js->clj on a json, but I don't want to get
+        ; too distracted installing an "$http reponse transform"
+        ; yet -- http://docs.angularjs.org/api/ng.$http
+        (aset $scope "phones" (js->clj data :keywordize-keys true))
+        ; (-> js/gdebug (set! (aget $scope "phones")))
+        ; (.log js/console (str (aget $scope "phones")))
+      )))
   (aset $scope "orderProp" "age")
 )
-  
