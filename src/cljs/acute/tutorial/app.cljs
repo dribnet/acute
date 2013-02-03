@@ -5,7 +5,7 @@
 (bootstrap)
 
 (-> angular
-  (.module "phonecat" (array))
+  (.module "phonecat" ["phonecatFilters"])
   (.config 
     ["$routeProvider" (fn [$routeProvider]
       (-> $routeProvider
