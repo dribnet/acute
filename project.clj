@@ -1,7 +1,7 @@
 (defproject acute "0.0.1-SNAPSHOT"
   :description "acute: experimental angular library"
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [net.drib/strokes "0.2.1-SNAPSHOT"]]
+                 [net.drib/strokes "0.2.1"]]
   :min-lein-version "2.0.0"
   :source-paths ["src/clj" "src/cljs"]
 
