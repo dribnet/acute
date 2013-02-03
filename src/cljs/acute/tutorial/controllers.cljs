@@ -4,21 +4,25 @@
 ; memo - would be great to wrap these aset/aget calls in something
 ; but for now that's not my main focus
 
+; memo2 about $http:
+; importing edn file directly would be better than
+; calling js->clj on a json, but I don't want to get
+; too distracted installing an "$http reponse transform"
+; yet -- http://docs.angularjs.org/api/ng.$http
+
 (defn PhoneListCtrl [$scope, $http]
   (-> $http (.get "phones/phones.json")
     (.success 
       (fn [data]
-        ; importing edn file directly would be better than
-        ; calling js->clj on a json, but I don't want to get
-        ; too distracted installing an "$http reponse transform"
-        ; yet -- http://docs.angularjs.org/api/ng.$http
         (aset $scope "phones" (js->clj data :keywordize-keys true))
-        ; (-> js/gdebug (set! (aget $scope "phones")))
-        ; (.log js/console (str (aget $scope "phones")))
       )))
   (aset $scope "orderProp" "age")
 )
 
-(defn PhoneDetailCtrl [$scope, $routeParams]
-  (aset $scope "phoneId" (aget $routeParams "phoneId"))
+(defn PhoneDetailCtrl [$scope, $routeParams, $http]
+  (-> $http (.get (str "phones/" (aget $routeParams "phoneId") ".json"))
+    (.success 
+      (fn [data]
+        (aset $scope "phone" data)
+      )))
 )
