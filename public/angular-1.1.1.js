@@ -54,7 +54,6 @@ if ('i' !== 'I'.toLowerCase()) {
 
 function fromCharCode(code) {return String.fromCharCode(code);}
 
-
 var Error             = window.Error,
     /** holds major version number for IE or NaN for real browsers */
     msie              = int((/msie (\d+)/.exec(lowercase(navigator.userAgent)) || [])[1]),
@@ -351,10 +350,13 @@ function isDate(value){
  * @param {*} value Reference to check.
  * @returns {boolean} True if `value` is an `Array`.
  */
+ // acute can override the internal isArray method
 function isArray(value) {
-  return toString.apply(value) == '[object Array]';
+  if(isDefined(acute)) {
+    return acute.isArray(value);
+  }
+  return toString.apply(value) == '[object Array]';  
 }
-
 
 /**
  * @ngdoc function
@@ -9501,7 +9503,7 @@ function $FilterProvider($provide) {
  */
 function filterFilter() {
   return function(array, expression) {
-    if (!(array instanceof Array)) return array;
+    if (!(isArray(array))) return array;
     var predicates = [];
     predicates.check = function(value) {
       for (var j = 0; j < predicates.length; j++) {
@@ -10086,13 +10088,13 @@ var uppercaseFilter = valueFn(uppercase);
  */
 function limitToFilter(){
   return function(array, limit) {
-    if (!(array instanceof Array)) return array;
+    if (!(isArray(array))) return array;
     limit = int(limit);
     var out = [],
       i, n;
 
     // check that array is iterable
-    if (!array || !(array instanceof Array))
+    if (!array || !(isArray(array)))
       return out;
 
     // if abs(limit) exceeds maximum length, trim it
@@ -10206,7 +10208,7 @@ function limitToFilter(){
 orderByFilter.$inject = ['$parse'];
 function orderByFilter($parse){
   return function(array, sortPredicate, reverseOrder) {
-    if (!(array instanceof Array)) return array;
+    if (!(isArray(array))) return array;
     if (!sortPredicate) return array;
     sortPredicate = isArray(sortPredicate) ? sortPredicate: [sortPredicate];
     sortPredicate = map(sortPredicate, function(predicate){
