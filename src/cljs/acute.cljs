@@ -11,20 +11,8 @@
     (= (.call (-> js/Object .-prototype .-toString) x) "[object Array]"))
 )
 
-; this was not necessary. stashing for now
-; (def emptyArray (array))
-; (defn ^:export arraySlice [s & args]
-;   (.log js/console (str "slice : " s "," args))
-;   (if (hyde-array? s)
-;     (apply hyde-array-slice (cons s args))
-;     (.apply (-> emptyArray .-slice) s args))
-; )
-
 (defn ^:export bootstrap []
   ; patch all seqs to also be read-only arrays for javascript interop
   (patch-known-arrayish-types)
   ; patch maps to include key based accessors on js object
-  (patch-known-mappish-types)
-  ; other future init here...
-  ; (.log js/console "acute bootstrapped complete.")
-)
+  (patch-known-mappish-types))

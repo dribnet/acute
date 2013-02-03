@@ -13,6 +13,4 @@
                           :controller PhoneListCtrl})
         (.when "/phones/:phoneId" {:templateUrl "partials/phone-detail.html"
                                    :controller PhoneDetailCtrl})
-        (.otherwise {:redirectTo "/phones"}))
-    )])
-)
+        (.otherwise {:redirectTo "/phones"})))]))

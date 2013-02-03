@@ -14,10 +14,8 @@
   (-> $http (.get "phones/phones.json")
     (.success 
       (fn [data]
-        (aset $scope "phones" (js->clj data :keywordize-keys true))
-      )))
-  (aset $scope "orderProp" "age")
-)
+        (aset $scope "phones" (js->clj data :keywordize-keys true)))))
+  (aset $scope "orderProp" "age"))
 
 (defn PhoneDetailCtrl [$scope, $routeParams, $http]
   (-> $http (.get (str "phones/" (aget $routeParams "phoneId") ".json"))
@@ -25,8 +23,5 @@
       (fn [data]
         (let [cdata (js->clj data :keywordize-keys true)]
           (aset $scope "phone" cdata)
-          (aset $scope "mainImageUrl" (first (:images cdata)))
-        )
-      )))
-  (aset $scope "setImage" #(aset $scope "mainImageUrl" %))
-)
+          (aset $scope "mainImageUrl" (first (:images cdata)))))))
+  (aset $scope "setImage" #(aset $scope "mainImageUrl" %)))
