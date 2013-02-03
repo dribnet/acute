@@ -23,6 +23,10 @@
   (-> $http (.get (str "phones/" (aget $routeParams "phoneId") ".json"))
     (.success 
       (fn [data]
-        (aset $scope "phone" data)
+        (let [cdata (js->clj data :keywordize-keys true)]
+          (aset $scope "phone" cdata)
+          (aset $scope "mainImageUrl" (first (:images cdata)))
+        )
       )))
+  (aset $scope "setImage" #(aset $scope "mainImageUrl" %))
 )
