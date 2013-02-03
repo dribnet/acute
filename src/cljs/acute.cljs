@@ -1,15 +1,7 @@
 (ns acute
-  (:require [mrhyde :refer [patch-known-arrayish-types 
-                            patch-known-mappish-types 
-                            patch-tostring-hydearray-is-array
-                            restore-original-js-fn
-                            patch-return-value-to-clj
-                            patch-args-keyword-to-fn
-                            hyde-array?
-                            hyde-array-slice
-                            hyde-array-splice
-                            hyde-array-push
-                            hyde-array-sort]]))
+  (:require [mrhyde :refer [patch-known-arrayish-types
+                            patch-known-mappish-types
+                            hyde-array?]]))
 
 (def angular (this-as ct (aget ct "angular")))
 
@@ -34,4 +26,5 @@
   ; patch maps to include key based accessors on js object
   (patch-known-mappish-types)
   ; other future init here...
-  (.log js/console "acute bootstrapped complete."))
+  ; (.log js/console "acute bootstrapped complete.")
+)

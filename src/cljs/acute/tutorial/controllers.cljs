@@ -1,7 +1,10 @@
-(ns acute.tutorial
-  (:require [acute :refer [placeholder]]))
+(ns acute.tutorial.controllers
+  (:require [acute :refer [angular]]))
 
-(defn ^:export PhoneListCtrl [$scope, $http]
+; memo - would be great to wrap these aset/aget calls in something
+; but for now that's not my main focus
+
+(defn PhoneListCtrl [$scope, $http]
   (-> $http (.get "phones/phones.json")
     (.success 
       (fn [data]
@@ -14,4 +17,8 @@
         ; (.log js/console (str (aget $scope "phones")))
       )))
   (aset $scope "orderProp" "age")
+)
+
+(defn PhoneDetailCtrl [$scope, $routeParams]
+  (aset $scope "phoneId" (aget $routeParams "phoneId"))
 )

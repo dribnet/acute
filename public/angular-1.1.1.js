@@ -6929,6 +6929,10 @@ function $RouteProvider(){
    * Adds a new route definition to the `$route` service.
    */
   this.when = function(path, route) {
+    // this obviously doens't go here, but how to grab this externally...?
+    if(isDefined(acute)) {
+      route = mrhyde.tojs(route);
+    }
     routes[path] = extend({reloadOnSearch: true}, route);
 
     // create redirection for trailing slashes

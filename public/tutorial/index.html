@@ -1,47 +1,16 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="phonecat">
 <head>
   <meta charset="utf-8">
   <title>Google Phone Gallery</title>
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/bootstrap.css">
-  <script src="../out/acute.js"></script>
   <script src="../angular-1.1.1.js"></script>
-  <script>
-    acute.bootstrap();
-  </script>
+  <script src="../out/acute.js"></script>
 </head>
-<body ng-controller="acute.tutorial.PhoneListCtrl">
+<body>
 
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span2">
-      <!--Sidebar content-->
- 
-      Search: <input ng-model="query">
-      Sort by:
-        <select ng-model="orderProp">
-          <option value="name">Alphabetical</option>
-          <option value="age">Newest</option>
-        </select>
-
-    </div>
-    <div class="span10">
-      <!--Body content-->
- 
-      <ul class="phones">
-        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
-          {{phone.name}}
-          <p>{{phone.snippet}}</p>
-        </li>
-      </ul>
-    
-    <!-- experiments -->
-    <!-- {{phones | json}}    -->
-
-    </div>
-  </div>
-</div>
+  <div ng-view></div>
 
 </body>
 </html>
