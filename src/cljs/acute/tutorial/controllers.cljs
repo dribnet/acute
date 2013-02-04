@@ -1,27 +1,22 @@
 (ns acute.tutorial.controllers
-  (:require [acute :refer [angular]]))
+  (:require [cljs.reader :refer [read-string]]
+            [acute :refer [angular]]))
 
 ; memo - would be great to wrap these aset/aget calls in something
 ; but for now that's not my main focus
 
-; memo2 about $http:
-; importing edn file directly would be better than
-; calling js->clj on a json, but I don't want to get
-; too distracted installing an "$http reponse transform"
-; yet -- http://docs.angularjs.org/api/ng.$http
-
 (defn PhoneListCtrl [$scope, $http]
-  (-> $http (.get "phones/phones.json")
+  (-> $http (.get "phones/phones.edn")
     (.success 
       (fn [data]
-        (aset $scope "phones" (js->clj data :keywordize-keys true)))))
+        (aset $scope "phones" data))))
   (aset $scope "orderProp" "age"))
 
 (defn PhoneDetailCtrl [$scope, $routeParams, $http]
-  (-> $http (.get (str "phones/" (aget $routeParams "phoneId") ".json"))
+  (-> $http (.get (str "phones/" (aget $routeParams "phoneId") ".edn"))
     (.success 
       (fn [data]
-        (let [cdata (js->clj data :keywordize-keys true)]
-          (aset $scope "phone" cdata)
-          (aset $scope "mainImageUrl" (first (:images cdata)))))))
+        (aset $scope "phone" data)
+        (aset $scope "mainImageUrl" (first (:images data))))))
   (aset $scope "setImage" #(aset $scope "mainImageUrl" %)))
+
