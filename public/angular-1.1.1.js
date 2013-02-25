@@ -352,9 +352,9 @@ function isDate(value){
  */
  // acute can override the internal isArray method
 function isArray(value) {
-  if(isDefined(acute)) {
-    return acute.isArray(value);
-  }
+  // if(isDefined(acute)) {
+  //   return acute.isArray(value);
+  // }
   return toString.apply(value) == '[object Array]';  
 }
 
@@ -6931,7 +6931,7 @@ function $RouteProvider(){
   this.when = function(path, route) {
     // this obviously doens't go here, but how to grab this externally...?
     if(isDefined(acute)) {
-      route = mrhyde.tojs(route);
+      route = mrhyde.mrhyde.tojs(route);
     }
     routes[path] = extend({reloadOnSearch: true}, route);
 
