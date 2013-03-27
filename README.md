@@ -1,13 +1,15 @@
-# victory
+# acute
 
-A Clojure library designed to ... well, that part is up to you.
+This is an example of how [strokes](https://github.com/dribnet/strokes) can be used for interop with the angular library.
+
+Currently there is just a port of the [angular tutorial](http://docs.angularjs.org/tutorial/). This version of the tutorial also replaces all json files with edn files so that phone data is provided by clojurescript data. This demo can also be [viewed online](http://dribnet.github.com/acute/).
 
 ## Usage
 
-FIXME
+lein cljsbuild auto
+cd public && ./web_server.sh
+open http://localhost:7878/tutorial/
 
 ## License
 
-Copyright © 2013 FIXME
-
-Distributed under the Eclipse Public License, the same as Clojure.
+[WTFPL](http://www.wtfpl.net/)
